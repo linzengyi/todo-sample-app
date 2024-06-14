@@ -146,35 +146,38 @@ export default function Todo() {
           </form>
           {/* 列表顯示 */}
           <Table size="small">
-            <TableBody>
-              {!isLoading ? (
-                Array.isArray(todos) &&
-                todos.map((todo) => (
-                  <>
-                    <TodoItem
-                      key={todo.id}
-                      todo={todo}
-                      action={{ loadData, setTodos, setIsLoading }}
-                    />
-                  </>
-                ))
-              ) : (
-                <>
-                  <TableRow key={-1}>
-                    <TableCell
-                      sx={{
-                        textAlign: "center",
-                        fontWeight: 700,
-                        fontSize: "1.5rem",
-                        lineHeight: "2rem",
-                      }}
-                    >
-                      Loading....
-                    </TableCell>
-                  </TableRow>
-                </>
-              )}
-            </TableBody>
+            { !isLoading ? 
+                (
+                  <TableBody>
+                    {
+                      todos.map((todo) => (
+                        <>
+                          <TodoItem
+                            key={todo.id}
+                            todo={todo}
+                            action={{ loadData, setTodos, setIsLoading }}
+                          />
+                        </>
+                      ))}
+                  </TableBody>
+                ) : 
+                (
+                  <TableBody>
+                    <TableRow>
+                      <TableCell
+                        sx={{
+                          textAlign: "center",
+                          fontWeight: 700,
+                          fontSize: "1.5rem",
+                          lineHeight: "2rem",
+                        }}
+                      >
+                        Loading....
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                )
+            }
           </Table>
         </Box>
         <Stack direction="row" justifyContent="center" className="py-2">
